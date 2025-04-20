@@ -3,6 +3,24 @@ import pandas as pd
 import joblib
 import plotly.graph_objects as go
 import requests 
+import os
+import urllib.request
+
+
+# Chargement dans le cloud des données si besoin
+urlTEST = "https://drive.google.com/uc?export=download&id=1VXgOAnXcC7QsSnbXkQTYhbNANUMtwwyq" 
+urlTRAIN = "https://drive.google.com/uc?export=download&id=1pd68rxtnlA8LMDCbJVjHAQlNbfifsx7j" 
+
+
+# Crée le dossier si nécessaire
+os.makedirs("ProcessedData", exist_ok=True)
+
+# Téléchargement si les fichiers n'existent pas déjà
+if not os.path.exists("ProcessedData/app_test_domain.csv"):
+    urllib.request.urlretrieve(urlTEST, "ProcessedData/app_test_domain.csv")
+
+if not os.path.exists("ProcessedData/app_train_domain.csv"):
+    urllib.request.urlretrieve(urlTRAIN, "ProcessedData/app_train_domain.csv")
 
 
 # Chargement des données
