@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: streamlit-dashboard
+    runtime: python
+    buildCommand: |
+      apt-get update && apt-get install -y git-lfs
+      git lfs install
+      git lfs pull
+      pip install -r requirements.txt
+    startCommand: streamlit run dashboard/app.py --server.port=10000 --server.enableCORS=false --server.enableXsrfProtection=false
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10
+    plan: free
